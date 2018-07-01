@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170615093823) do
+ActiveRecord::Schema.define(version: 20180627143025) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string "email"
@@ -101,6 +101,24 @@ ActiveRecord::Schema.define(version: 20170615093823) do
 
   create_table "specializations", force: :cascade do |t|
     t.string "title"
+  end
+
+  create_table "specializations_tags", force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "specialization_id"
+    t.index ["specialization_id"], name: "index_specializations_tags_on_specialization_id"
+    t.index ["tag_id"], name: "index_specializations_tags_on_tag_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.integer "news_id"
+    t.integer "city_id"
+    t.integer "profession_status_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_tags_on_city_id"
+    t.index ["news_id"], name: "index_tags_on_news_id"
+    t.index ["profession_status_id"], name: "index_tags_on_profession_status_id"
   end
 
 end
